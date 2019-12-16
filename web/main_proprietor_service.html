@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>main</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">  
+   	<script src="js/jquery.min.js"></script>
+   	<script src="js/bootstrap.min.js"></script>
+   	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<script type="text/javascript">
+	var request = new XMLHttpRequest();
+	
+	getLoginInfo();
+	
+	function getLoginInfo(){
+		$.get("proprietorJSP/getLoginInfo.jsp",function(result){
+			
+			var name = JSON.parse(result);
+			$("#login_information").text("欢迎您，业主："+name+"!");
+			
+			
+		});
+	}
+	
+	function exit(){
+		window.location.href="login.html"; 
+		alert("退出成功");
+	}
+	
+	function toBuyCar(){
+		window.location.href="carManageYZ.html?backurl=main_proprietor.html";
+	}
+	function toMyCar(){
+		window.location.href="carManageYZ2.html?backurl=main_proprietor.html";
+	}
+	
+	function toCar(){
+		window.location.href="carManageYZ.html?backurl=main_proprietor.html";
+	}
+	
+	function toInfo(){
+		window.location.href="main_proprietor_info.html?backurl=main_proprietor.html"; 
+	}
+	
+	function toService(){
+		window.location.href="main_proprietor_service.html?backurl=main_proprietor.html"; 
+	}
+	function toComplaint(){
+		window.location.href="complaints_owner.html?backurl=main_proprietor.html"; 
+	}
+	function toPay(){
+		window.location.href="payment_owner.html?backurl=main_proprietor.html"; 
+	}
+	
+	function toMessage(){
+		window.location.href="MessageYZ.html?backurl=main_proprietor.html"; 
+	}
+	
+	
+
+	function clearServiceTable(){
+		$("#serviceInfosTable tr:not(:first)").empty();
+	}
+	
+	
+	function getServiceInfo(){
+		var url ="proprietorJSP/updateServiceInfo.jsp";
+		$.get(url,function(result){
+				clearServiceTable();
+				$("#introdc").val("");
+				var serviceInfos = JSON.parse(result);
+   			    for (var i = 0; i < serviceInfos.length; i++) {
+   			    	 var table = document.getElementById("serviceInfosTable");
+   					 var newrow = table.insertRow();
+   					 var col1 = newrow.insertCell();
+   					 var col2 = newrow.insertCell();
+   					 var col3 = newrow.insertCell();
+   					 var col4 = newrow.insertCell();
+   					 var col5 = newrow.insertCell();
+   					 var col6 = newrow.insertCell();
+   					 var col7 = newrow.insertCell();
+   					 var col8 = newrow.insertCell();
+   					 col1.innerHTML= serviceInfos[i].service_ID;
+   					 col2.innerHTML= serviceInfos[i].S_SDATE;
+   					 col3.innerHTML= serviceInfos[i].S_CONTENT;
+   					 if(serviceInfos[i].serviceStar!=null&&serviceInfos[i].serviceStar!=""){
+   					 	col7.innerHTML= "已结束";
+   					 	if(serviceInfos[i].serviceStar == 1){
+   					 		col8.innerHTML = "★";
+   					 	}else if(serviceInfos[i].serviceStar == 2){
+   					 		col8.innerHTML = "★★";
+   					 	}else if(serviceInfos[i].serviceStar == 3){
+   					 		col8.innerHTML = "★★★";
+   					 	}else if(serviceInfos[i].serviceStar == 4){
+   					 		col8.innerHTML = "★★★★";
+   					 	}else if(serviceInfos[i].serviceStar == 5){
+   					 		col8.innerHTML = "★★★★★";
+   					 	}
+   					 }else if(serviceInfos[i].S_NAME!=null&&serviceInfos[i].S_NAME!=""){
+   					 	col4.innerHTML= serviceInfos[i].S_NAME;
+   					 	col5.innerHTML= serviceInfos[i].S_TEL;
+   					 	col7.innerHTML= "已处理";
+   					 	col8.innerHTML = "<button class='btn btn-primary btn-xs' data-toggle='modal' data-target='#myModal' onclick='changeModel(this);'>评价</button>"
+   					 }else{
+   						col7.innerHTML= "未处理";
+   					 }
+   					 
+   					 if(serviceInfos[i].S_EDATE!=null&&serviceInfos[i].S_EDATE!="")
+   					 	col6.innerHTML= serviceInfos[i].S_EDATE;
+   					 
+   				}
+		});
+	}
+	
+	getServiceInfo();
+	
+	function saveServiceInfos(){
+		var serviceStar = $("#serviceStar").val();
+		var service_ID = $("#service_ID").val();
+		var url = "proprietorJSP/endService.jsp?";
+		url +=("serviceStar="+serviceStar);
+		url +=("&service_ID="+service_ID);
+		
+		$.get(url,function(result){
+			var success = JSON.parse(result);
+			if(success == 1){
+				alert("评价成功,本次报修已结束");
+				getServiceInfo();
+			}else{
+				alert("评价失败，请重试");
+			}
+		});
+	}
+	
+	
+	function changeModel(obj){
+		var number = $(obj).parent().prev().prev().prev().prev().prev().prev().prev().text();
+		//alert(number);
+		$("#service_ID").val(number);
+		
+	}
+	
+	function sumbitServiceInfo(){
+		var content = $("#introdc").val();
+		if(content==""&&content==null){
+			alert("内容不能为空")
+		}else{
+			var url = "proprietorJSP/sumbitServiceInfo.jsp?content=";
+			url += content;
+			$.get(url,function(result){
+				var success = JSON.parse(result);
+				if(success == 1){
+					alert("提交成功，请等待物业管理员确认");
+					getServiceInfo();
+				}
+				else{
+					alert("提交出错，请检查您的申请单是否符合规范");
+				}
+				
+			});
+		}
+	}
+	
+</script>
+<body>
+	<div class="header">
+		<div class="logo">
+			<img src="img/物业.png" style="height: 70px;padding-bottom: 5px">
+		</div>
+		
+		<div class="title1">
+			小区物业管理系统
+		</div>
+		<div class="title2">
+			The Analysis and Design of Residence Community Property Management System
+		</div>
+		<div class="login_info">
+			<label id="login_information">欢迎您，业主：</label>
+			<a href="#" class ="exit-font" onclick="exit();">退出登录</a>
+		</div>
+
+	</div>
+	<div class="navigation">
+		<ul class="nav-1">
+			<li class="nav-2"><img class="nav-img" src="img/主页.png"><a href="#" class="nav-3" onclick="toInfo();">个人信息</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/车位.png"><a class="nav-3" href="#" id="carManage" onclick="toBuyCar();">车位购买</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/车位2.png"><a class="nav-3" href="#" onclick="toMyCar();">我的车位</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/报修.png"><a href="#" class="nav-3" onclick="toService();">报修服务</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/缴费.png"><a href="#" class="nav-3" onclick="toPay();">缴费中心</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/投诉.png"><a href="#" class="nav-3" onclick="toComplaint();">投诉服务</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/通知.png"><a href="#" class="nav-3" onclick="toMessage();">通知中心</a></li>
+		</ul>
+	</div>
+	
+	<div class="container content-info">
+		<div class = "container">
+			<h3 class="page-header" id="headStyle">报修申请</h3>
+			<div class="form-group">
+				<label for="introduction" class="control-label">故障描述：</label>
+				<textarea id = "introdc" class="form-control" rows="3" style="resize: none;"></textarea>
+			</div>		
+			<hr/>
+			<button class = "btn btn-primary" style="float:right;" onclick="sumbitServiceInfo();">提交</button>
+		</div>
+		
+		<div class = "container">
+			<h3 class="page-header" id="headStyle">历史保修信息</h3>
+			<table class="table table-striped" id = "serviceInfosTable">
+				 <thead>
+				    <tr>
+				      <th>报修编号</th>
+				      <th>报修提交时间</th>
+				      <th>报修内容</th>
+				      <th>维修人员姓名</th>
+				      <th>维修人员电话</th>
+				      <th>报修完成时间</th>
+				      <th>是否处理</th>
+				      <th>用户评价</th>
+				    </tr>
+				 </thead>
+				 <tbody>
+				</tbody>
+			</table>
+		</div>
+		
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                <h4 class="modal-title" id="myModalLabel">报修处理</h4>
+		            </div>
+		            <div class="modal-body">
+							<form class="form-horizontal div-top" role="form">
+								<fieldset>
+								
+									<div class="form-group">
+										<label class="col-sm-5 control-label">报修编号：</label>
+										
+										<div class="col-sm-4">
+											<input type="text" class="form-control input-width-half" id="service_ID" readonly="readonly"
+												   placeholder="请输入报修编号">
+										</div>
+
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-5 control-label">维修评价：</label>
+										
+										<div class="col-sm-4">
+											<select id="serviceStar" class="form-control" style="width: 150px;">  
+											    <option value="1">★</option>  
+											    <option value="2">★★</option>  
+											    <option value="3">★★★</option>  
+											    <option value="4">★★★★</option>  
+											    <option value="5">★★★★★</option>  
+											</select>
+										</div>
+									</div>
+									
+								</fieldset>
+							</form>
+					</div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveServiceInfos();">提交更改</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div>	
+	</div>
+	<footer>
+		Copyright©HHUC 闵信超 郑伟涛 吴东海
+	</footer>
+</body>
+</html>

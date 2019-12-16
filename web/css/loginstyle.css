@@ -1,0 +1,225 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin: 0px;
+	padding: 0px;
+}
+body,button,input,select,textarea{font:12px/1.125 宋体,Arial,Helvetica,sans-serif;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+ol,ul{list-style:none;}
+img{ border:none}
+input,button,select,textarea{outline:none;font-family:verdana;}
+.clearfix{zoom:1;}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:active{text-decoration:none;}
+.mailLoginBox{
+	min-width:936px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+.mailLoginBox .mailLogin{position:absolute;height:591px;top:50%;left:0;width:100%;margin-top:-295px;}
+.header{margin:0 auto;width:936px;height:70px;}
+.header .dlogo{
+	float:left;
+	margin-top:17px;
+}
+.header a.logo{
+	height:46px;
+	width:260px;
+	display: block;
+}
+.header .nav{
+	float:right;
+	margin-top:39px;
+	visibility: hidden;
+}
+.header .nav a{color:#666;}
+.header .nav span{padding:0 8px;color:#999;}
+.main{margin:0 auto;height:485px;}
+.main .positionBox{
+	width:936px;
+	padding-top:70px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+.main .loginBox{float:right;border-radius:5px;}
+.main .loginBox{
+	width:334px;
+    *overflow:hidden;				
+	box-shadow:3px 3px 5px #696969;
+	border:1px solid #E5E5E5;
+	float: right;
+	padding-bottom: 10px;
+	background-image: url(../image/logink_bg.png);
+	background-repeat: repeat;
+	background-position: left top;
+}
+.main .loginBox .tit{margin-bottom:10px;width:336px;}
+.main .loginBox .tit li{
+	float:left;
+	height:32px;
+	width:100px;
+	text-align:left;
+	line-height: 32px;
+	font-size: 16px;
+	font-weight: bold;
+	text-indent: 30px;
+	margin-right:200px;
+	margin-top:10px;
+}
+.main .loginBox .freeMailbox,.main .loginBox .vipMailbox{padding:0 32px 0;width:270px;}
+.main .loginBox .loginError{display:block;height:22px;line-height:22px;color:#e32929;}
+.safeTip{background-color:#FEFEC1;border:1px solid #D9CCB4;color:#666;line-height:18px;margin-top:6px;padding:4px 12px 2px 8px;}
+.main .loginBox .username,.main .loginBox .password,.main .loginBox .vsn{
+	ime-mode:disabled;
+	width:242px;
+	height:34px;
+	line-height:34px;
+	border:1px solid #c8c8c8;
+	color:#666;
+	padding-left:8px;
+	padding-right:18px;
+	font-size:14px;
+	font-weight:bold;
+	border:1px solid #6b9bdc;
+	box-shadow:0 0 3px #6b9bdc inset;
+	background-color: #FFF;
+}
+.main .loginBox .passwordBox{position:relative;clear:both;_zoom:1;}
+.main .loginBox .mailvsn{position:relative;clear:both;overflow:hidden;_zoom:1;}
+.main .loginBox .mailvsn{margin-top:22px;height:36px;width:100%;}
+.main .loginBox .loginSetting{margin-top:8px;height:22px;line-height:22px;}
+.main .loginBox .loginSetting .forgetPas{float:right;color:#7697c4;}
+.main .loginBox .loginSetting input{vertical-align:-3px;}
+.main .loginBox .loginOrRegister{
+	margin-top:15px;
+	text-align:left;
+}
+.main .loginBox .validimageBox{position:relative;clear:both;_zoom:1;margin-top: 10px;}
+.main .loginBox .validimage{float:left;ime-mode:disabled;width:90px;height:34px;line-height:34px;border:1px solid #c8c8c8;color:#666;padding-left:8px;padding-right:10px;margin-right: 5px;font-size:14px;font-weight:bold;}
+.main .loginBox .loginOrRegister .loginBtn{
+	background: url("../image/icon.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 33px;
+    line-height: 9999px;
+    overflow: hidden;
+    width: 96px;
+}
+.main .loginBox .loginOrRegister .loginBtn:hover{
+	background-position: 0 -33px;
+}
+
+.main .loginBox .loginOrRegister .loginBtn:active {
+    background-position: 0 -66px;
+}
+
+.main .loginBox .loginOrRegister .loginBtnload, .main .loginBox .loginOrRegister .loginBtnload:hover, .main .loginBox .loginOrRegister .loginBtnload:active {
+    background: url("../image/loginloading.gif") no-repeat scroll 0 0 transparent;
+}
+
+.main .loginBox .loginOrRegister span{line-height:33px;color:#999;margin-right:10px;}
+.main .loginBox .loginOrRegister span a{color:#7697c4;}
+.main .loginBox .loginOrRegister p b{color:#999;font-weight:normal;}
+.main .loginBox .loginOrRegister p{
+	margin-top:10px;
+	height:16px;
+	line-height:16px;
+	text-align:left;
+	width: 300px;
+	float: left;
+}
+.main .loginBox .loginOrRegister p a{color:#7697C4;}
+.main .loginBox .usernameBox{
+	position:relative;
+	width:270px;
+	height:36px;
+	float: left;
+	margin-bottom: 10px;
+}
+.main .loginBox .focus input{
+	border:1px solid #6b9bdc;
+	box-shadow:0 0 3px #6b9bdc inset;
+	background-color: #FFF;
+}
+.main .loginBox .focus label{color:#999;}
+
+.main .loginBox .usernameBox .clearname{position:absolute;right:8px;top:12px;_z-index:2;display:block;height:9px;width:9px;background:url(../image/icon.png) 0 -200px no-repeat;_background:url(../image/icon.gif) 0 -200px no-repeat;}
+.main .loginBox .placeholder{
+	position:absolute;
+	z-index:2;
+	display:block;
+	left:0;
+	top:0;
+	height:34px;
+	line-height:34px;
+	color:#999;
+	padding-left:11px;
+	font-size:14px;
+	cursor:text;
+	width: 106px;
+}
+.main .loginBox .vipMailbox .usernameBox span,.main .loginBox .vipMailbox .mailvsn span{font-family:verdana;font-weight:bold;}
+.main .loginBox .vipMailbox .usernameBox .clearname{right:122px;}
+.main .loginBox .vipMailbox .username,.main .loginBox .vipMailbox .vsn{float:left;ime-mode:disabled;width:130px;*vertical-align:middle;_position:absolute;_left:0;_top:0;_height:34px;_z-index:1;}
+.main .loginBox .vipMailbox .vsn{width:130px;*vertical-align:-10px;}
+.main .loginBox .vipMailbox .vipDomain{width:110px;_width:111px;height:34px;line-height:34px;background-color:#f9f9f9;border:1px solid #c8c8c8;border-left:0;text-align:center;color:#333;font-size:14px;float:left;_position:absolute;_top:0;_right:0;_z-index:2;}
+.main .loginBox .vipMailbox .vipDomain a{display:inline-block;color:#7697C4;text-decoration:none;font-size:12px;}
+.main .loginBox .vipMailbox .vipDomain a:hover{text-decoration:none;}
+.main .loginBox .vipMailbox .loginSetting .forgetPas{color:#7697c4;}
+.main .loginBox .vipMailbox .loginOrRegister p a.pay{display:inline-block;padding-left:18px;color:#7697c4;background:url(/image/icon.png) 0 -160px no-repeat;_background:url(/image/icon.gif) 0 -160px no-repeat;}
+.main .loginBox .vipError,.main .loginBox .freeError{
+	visibility:visble;
+	height:22px;
+	line-height:22px;
+	float: left;
+	padding-top: 0;
+	padding-right: 0px;
+	padding-bottom: 0;
+	padding-left: 0px;
+}
+.main .loginBox .checkcodeBox{position:relative;margin-top:5px;}
+.main .loginBox .checkcodeBox input{border:1px solid #c8c8c8;float:left;padding-left:8px;width:142px;height:34px;line-height:34px;color:#999;font-size:14px;}
+.main .loginBox .checkcodeBox img{float:right;border:1px solid #c8c8c8;vertical-align:bottom;}
+.main .loginBox .checkcodeBox p{height:20px;line-height:20px;color:#666;}
+.main .loginBox .checkcodeBox a{float:right;color:#7697c4;}
+
+.main .loginBox .loginFooter{
+	margin-top:12px;
+	margin-left:0px;
+	height:10px;
+	line-height:20px;
+	font-size:12px;
+	float: left;
+	padding-top: 12px;
+	padding-right: 0;
+	padding-left: 32px;
+	width: 250px;
+}
+
+.main .loginBox .loginFooter a{font-weight:bold;margin-right:11px;color:#f00;text-decoration:none;}
+.main .loginBox .loginFooter a:hover{text-decoration:underline;}
+.main .loginBox .loginFooter span{color:#999;}
+.footerBox{width:100%;height:36px;background-color:#fff;}
+.footer{
+	margin:0 auto;
+	width:936px;
+	height:36px;
+	line-height:36px;
+}
+.footer p{
+	color:#999;
+	text-align: center;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.freeM_btn a:hover{background-position:0 -30px;padding-left:18px;text-decoration:none;}
+.freeM_btn a:hover span{background-position:right -30px;padding-right:18px;text-decoration:none;}
+
+.error{position:absolute;top:150px;left:180px;width:420px;}
+.timeout h3,.locked h3,.keyerr h3{color:#710000;}

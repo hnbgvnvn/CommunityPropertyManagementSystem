@@ -1,0 +1,194 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>main</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="bootstrap3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/index.css">  
+	
+	<script src="bootstrap3.3.4/js/bootstrap.min.js" type="text/javascript"></script> 
+   	<script src="js/jquery.min.js"></script>
+   	<script src="js/bootstrap.min.js"></script>
+   	<script type="text/javascript" src="js/jquery.js"></script>
+   	
+   	<script type="text/javascript" src="lkk.js/lkk.pManager.js"></script>
+   	
+	<!--表格内容居中对齐-->
+	<style type="text/css">
+		.table th, .table td 
+		{ 
+			text-align: center;
+			vertical-align: middle!important;
+		}
+	</style>
+	
+	<script type="text/javascript">
+	
+		
+		getLoginInfo();
+		
+		function getLoginInfo(){
+			$.get("proprietorJSP/getLoginInfo.jsp",function(result){
+				
+				var name = JSON.parse(result);
+				$("#login_information").text("欢迎您，管理员："+name+"!");
+				
+				
+			});
+		}
+	
+		function exit(){
+			window.location.href="login.html"; 
+			alert("退出成功");
+		}
+		
+		function toRegister(){
+   			window.location.href="main_manager_register.html?backurl=main_manager.html"; 
+   		}
+   		
+   		function toSearch(){
+   			window.location.href="main_manager_search.html?backurl=main_manager.html"; 
+   		}
+   		function toService() {
+   			window.location.href="main_manager_service.html?backurl=main_manager.html"; 
+		}
+   		
+   		function toEditCar(){
+   			window.location.href="carManageGLY.html?backurl=main_manager.html";
+   		}
+   		function toNewCar(){
+   			window.location.href="carManageGLY2.html?backurl=main_manager.html";
+   		}
+   		function toPay(){
+   			window.location.href="payment_manager.html?backurl=main_manager.html";
+   		}
+   		function toComplaint(){
+   			window.location.href="complaints_manager.html?backurl=main_manager.html";
+   		}
+   		
+   		function toMessage() {
+   			window.location.href="MessageGLY.html?backurl=main_manager.html";
+		}
+	
+	
+	</script>
+	
+	
+</head>
+<body onload="loadPTable();">
+	<div class="header">
+		<div class="logo">
+			<img src="img/物业.png" style="height: 70px;padding-bottom: 5px">
+		</div>
+		
+		<div class="title1">
+			小区物业管理系统
+		</div>
+		<div class="title2">
+			The Analysis and Design of Residence Community Property Management System
+		</div>
+		<div class="login_info">
+			<label id="login_information">欢迎您，业主：</label>
+			<a href="#" class ="exit-font" onclick="exit();">退出登录</a>
+		</div>
+	</div>
+	
+	<div class="navigation">
+		<ul class="nav-1">
+			<li class="nav-2"><img class="nav-img" src="img/search.png"><a href="#" class="nav-3" onclick = "toSearch();">业主查询</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/用户注册.png"><a href="#" class="nav-3" onclick = "toRegister();">业主注册</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/车位.png"><a class="nav-3" href="#" id="carManage" onclick="toEditCar();">车位编辑</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/车位2.png"><a class="nav-3" href="#" onclick="toNewCar();">新增车位</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/报修.png"><a href="#" class="nav-3" onclick="toService();">报修服务</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/缴费.png"><a href="#" class="nav-3" onclick="toPay();">缴费中心</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/投诉.png"><a href="#" class="nav-3" onclick="toComplaint();">投诉服务</a></li>
+			<li class="nav-2"><img class="nav-img" src="img/通知.png"><a href="#" class="nav-3" onclick="toMessage();">通知中心</a></li>
+		</ul>
+	</div>
+	<div class="container" >
+		<fieldset>
+			<form>
+				<br>
+				<legend>创建缴费</legend>
+				<br>
+	 			<div class="form-group">  
+			    	<div class="input-group col-xs-12"> 
+			       		<div class="input-group">  
+							<input type="text" name="pUNo" id="pUNo" class="form-control" style="width: 250px;" placeholder="业主编号"> 
+			            	<select name="pPaymentKinds" id="pPaymentKinds" class="form-control" style="width: 150px;">  
+			                	<option value="1">车位费</option>  
+			           			<option value="2">维修费</option>
+			            		<option value="3">物业管理费</option> 
+			            		<option value="4">水电费</option>   
+			           		</select>  
+			           		<input type="text" name="pMoney" id="pMoney" class="form-control" style="width: 250px;" placeholder="缴费金额"> 
+
+			           		<label class="form-control" style="width: 110px; border: none" >截止日期:</label>
+	        				<input type="date" name="pDeadline" id="pDeadline" class="form-control" style="width: 250px;" >
+	        				<input type="button" onclick="pConfirm();"  class="btn btn-success" value="确定" >
+			        	</div>  
+
+   					</div>  
+				</div> 
+			</form>	
+		</fieldset>
+		
+	</div>
+	<div class="container" >
+		<br><br>
+  		<legend>缴费清单</legend>
+	
+
+		<div class="input-group">  
+			<input type="text" name="pUInfo" id="pUInfo" class="form-control" style="width: 150px;" placeholder="业主编号"> 
+			   	<select name="sPaymentKinds" id="sPaymentKinds" class="form-control" style="width: 150px;">
+			        <option value="0">全部</option> 
+			        <option value="1">车位费</option>  
+			        <option value="2">维修费</option>
+			        <option value="3">物业管理费</option>  
+			        <option value="4">水电费</option> 
+			    </select>  
+			    <select name="sStateKinds" id="sStateKinds" class="form-control" style="width: 150px;">  
+			        <option value="0">全部</option>  
+			        <option value="2">已缴费</option>  
+			        <option value="1">未缴费</option>
+			    </select> 
+			   <input type="button" onclick="pSearch();"  class="btn btn-success" value="查询" > 
+		</div>  
+		<br>
+
+		<table id = "pTable" class="table table-bordered">
+
+ 			
+			<thead>
+				<tr class="TableCellText">
+					<th>缴费编号</th>
+					<th>业主编号</th>
+					<th>业主姓名</th>
+					<th>缴费项目</th>
+					<th>应缴金额</th>
+					<th>截止日期</th>
+					<th>是否结清</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="container">
+			<form class="form-inline">
+				<a onclick="preRow();">上一页</a>
+				<a onclick="nextRow();">下一页</a>
+				总共<label id="lblTotal" value = "1"></label>页
+				当前<label id="lblRequest"></label>页
+			</form>
+	</div>
+	<footer>
+		Copyright©HHUC 刘凯祥 陆威 李凯凯
+	</footer>
+</body>
+</html>

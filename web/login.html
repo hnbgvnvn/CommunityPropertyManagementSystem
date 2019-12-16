@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>欢迎进入小区物业管理系统</title>
+
+<style type="text/css">
+
+
+
+html,body{  
+    height: 100%;  
+} 
+body{
+	background: url(image/background5.jpg);
+	background-repeat:no-repeat;
+    background-size:100% 100%;
+    background-origin:content-box;
+}
+
+.login_head_text{
+	
+	text-align: center;
+	font-family: "微软雅黑";
+	padding-top: 20%;
+}
+
+.col-center-block {  
+    float: none;  
+    display: block;  
+    margin-left: auto;  
+    margin-right: auto;  
+    top: 20px;
+}
+
+.form_padding{
+	margin-top: 20px;
+}
+
+.button_padding{
+	margin-top: 35px;
+}
+.div-content{
+	position: absolute;
+	height:50%;
+	width:500px;
+	left:37%;
+	top:20%; 
+	margin:0 auto;
+}
+
+footer{
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	bottom: 0;
+	left:0px;
+	background-color: #444444;
+	opacity: 0.6;
+	color: white;
+	text-align: center;
+	padding:15px;
+}
+
+</style>
+
+<script type="text/javascript">
+	var request = new XMLHttpRequest();
+	
+	function login()
+	{	
+		var flag = 1;
+		var username = $("#username").val();
+		if(username == ""||username == null){
+			flag = 0;
+			alert("登录名不能为空");
+		}
+		var password = $("#password").val();
+		if(password == ""||password == null){
+			alert("密码不能为空");
+		}
+		if(flag == 1){
+			var url = "login.jsp?userName=" + username;
+			url +="&Password=";
+			url += password;
+			$.get(url,function(result){
+				var canLogin = JSON.parse(result);
+				if(canLogin == 1){
+					alert("登录成功");
+					window.location.href="main_proprietor.html?backurl="+window.location.href; 
+				}
+				else if(canLogin == 2){
+					alert("登录成功");
+					window.location.href="main_manager.html?backurl="+window.location.href; 
+					
+				}
+				else
+				{
+					alert("登陆失败");
+				}
+				
+			});
+		}
+	}
+</script>
+
+</head>
+<body>
+	<div class="container div-content">
+		<h3 class = "login_head_text">小区物业管理系统</h3>
+		<hr>
+		<div class="col-xs-8 col-md-8 col-center-block " >
+			<form class="form-signin">
+				<input type = "text" class="form-control form_padding" id= "username" placeholder="用户名">
+				<input type = "password" class="form-control form_padding" id= "password" placeholder="密码">
+				
+			</form>
+			<button class="btn btn-primary btn-block button_padding" onclick="login()">登录</button> 
+		</div>
+	</div>
+	<footer>
+		Copyright©HHUC
+	</footer>
+		
+</body>
+</html>
